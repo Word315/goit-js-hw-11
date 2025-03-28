@@ -9,7 +9,7 @@ export function renderGallery(images) {
                 <img src="${webformatURL}" alt="${tags}" />
             </a>
             <div class="info">
-                <p>❤️ ${likes} | 👁️ ${views} | 💬 ${comments} | ⬇️ ${downloads}</p>
+                <p>Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}</p>
             </div>
         </li>
     `).join('');
