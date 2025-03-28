@@ -27,7 +27,7 @@ form.addEventListener('submit', async (event) => {
     console.log("Галерея очищена:", gallery.innerHTML); 
 
     loader.style.display = 'block'; 
-
+   
     try {
         const images = await fetchImages(searchQuery);
 
