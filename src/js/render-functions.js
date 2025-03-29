@@ -1,20 +1,30 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+const gallery = document.querySelector('.gallery');
+let lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 }); // Один екземпляр
+
+// Функція для очищення галереї перед новим рендерингом
+export function clearGallery() {
+    gallery.innerHTML = '';
+}
+
+// Функція рендерингу нових зображень
 export function renderGallery(images) {
-    const gallery = document.querySelector('.gallery');
+    clearGallery(); // Очищаємо галерею перед рендерингом нових зображень
+
     const markup = images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
-        <li class="gallery-item">
-            <a href="${largeImageURL}" data-lightbox="gallery">
-                <img src="${webformatURL}" alt="${tags}" />
-            </a>
+        <a href="${largeImageURL}" class="gallery-item">
+            <img src="${webformatURL}" alt="${tags}" />
             <div class="info">
-                <p>Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}</p>
+                <p><b>Likes:</b> ${likes}</p>
+                <p><b>Views:</b> ${views}</p>
+                <p><b>Comments:</b> ${comments}</p>
+                <p><b>Downloads:</b> ${downloads}</p>
             </div>
-        </li>
+        </a>
     `).join('');
-    
+
     gallery.innerHTML = markup;
-    const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
-    lightbox.refresh();
+    lightbox.refresh(); // Оновлюємо Lightbox після рендерингу нових елементів
 }
